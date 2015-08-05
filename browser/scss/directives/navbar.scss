@@ -1,0 +1,57 @@
+navbar {
+
+  display: block;
+  background: white;
+  border-bottom: 1px solid black;
+  box-shadow: 1px 1px 14px -3px black;
+
+  .container {
+    width: 1340px;
+    padding-top: 20px;
+  }
+
+  logo {
+    margin: 0 auto;
+  }
+
+  a {
+    color: black;
+    font-size: 16px;
+  }
+
+  .nav > li > a {
+    cursor: pointer;
+    transition: color 0.2s;
+    &.active {
+      color: darken(#0046f3, 10%);
+    }
+    &:hover {
+      background: none;
+      color: #0046f3;
+    }
+    &:focus {
+      background: none;
+    }
+  }
+
+  .login-button {
+    float: right;
+    border: 1px solid black;
+    margin-top: 10px;
+    background: none;
+    outline: none !important;
+  }
+
+  .welcome {
+    float: right;
+    margin-top: 12px;
+    span {
+      color: white;
+    }
+    a {
+      color: #0046f3;
+      cursor: pointer;
+    }
+  }
+
+}
