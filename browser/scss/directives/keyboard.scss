@@ -1,0 +1,15 @@
+.keyboard {
+	width: 100%;
+
+	.control-panel {
+		border: 1px solid black;
+		border-radius: 3px; 
+		background-color: lightBlue; 
+
+		.off {
+			opacity: 0.5;
+		}
+
+	}
+
+}

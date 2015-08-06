@@ -1,0 +1,33 @@
+<div class="keyboard">
+	<div class="control-panel">
+		<button ng-show="params.isOn" ng-click="toggleOn()" class="btn btn-success">ON</button>
+		<button ng-show="!params.isOn" ng-click="toggleOn()" class="btn btn-danger">OFF</button>
+		Tuning: {{tuning}}
+		Octave: <select ng-model="params.octave">
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+			<option>6</option>
+			<option>7</option>
+			<option>8</option>
+		</select>
+		Tone: <select ng-model="params.tone">
+			<option>sine</option>
+			<option>triangle</option>
+			<option>square</option>
+			<option>sawtooth</option>
+		</select>
+		Instrument Range:<input ng-model="params.numKeys">
+		Duration: <select ng-model="params.duration">
+			<option value="16n">sixteenth note</option>
+			<option value="8n">eighth note</option>
+			<option value="4n">quarter note</option>
+			<option value="2n">half note</option>
+			<option value="1n">whole note</option>
+		</select>
+	</div>
+	<touch-key note="{{synthFactory}}" index ="{{$index}}" num-keys ="params.numKeys" ng-repeat="key in _.range(1, params.numKeys + 1)"></touch-key>
+	<pre>{{params}}</pre>
+</div>

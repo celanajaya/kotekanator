@@ -1,3 +1,20 @@
 <section id="home">
-    <score-editor></score-editor>
+<div class="container">
+	<h3>Add a synth <button ng-click="addSynth()" class="btn btn-primary">+</button></h3>
+	<h3>Remove a synth <button ng-click="removeSynth()" class="btn btn-danger">-</button></h3>
+</div>
+<h4>Tuning:<select ng-model="tuning"></h4>
+	<option>major</option>
+	<option>minor</option>
+	<option>balinese</option>
+	<option>selesir</option>
+	<option>tembung</option>
+	<option>sunaren</option>
+	<option>slendro</option>
+</select>
+<h4>Effects?!</h4>
+<div class="rack">
+	<keyboard tuning="tuning"></keyboard>
+</div>
+<pre>{{synths}}</pre>
 </section>

@@ -20,8 +20,5 @@ body {
   margin: 0 auto;
 }
 
-@import 'directives/main';
+@import 'directives/_main';
 @import 'home/main';
-@import 'about/main';
-@import 'tutorial/main';
-@import 'login/main';

@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('fullScore', ['ui.router', 'ui.bootstrap', 'fsaPreBuilt']);
+window.app = angular.module('powerSynth', ['ui.router', 'ui.bootstrap', 'fsaPreBuilt']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
