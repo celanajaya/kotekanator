@@ -1,20 +1,17 @@
 <section id="home">
-<div class="container">
-	<h3>Add a synth <button ng-click="addSynth()" class="btn btn-primary">+</button></h3>
-	<h3>Remove a synth <button ng-click="removeSynth()" class="btn btn-danger">-</button></h3>
-</div>
+
 <h4>Tuning:<select ng-model="tuning"></h4>
-	<option>major</option>
-	<option>minor</option>
-	<option>balinese</option>
-	<option>selesir</option>
-	<option>tembung</option>
-	<option>sunaren</option>
-	<option>slendro</option>
+	<option ng-repeat="scale in tunings">{{scale}}</option>
 </select>
-<h4>Effects?!</h4>
+<h4>Add Filter:<select ng-model="filter"></h4>
+	<option ng-repeat="filt in filtTypes">{{filt}}</option>
+</select>
+<h4><button ng-hide="isRecording" class="btn btn-success" ng-click="record()">RECORD</button></h4>
+<h4><button ng-hide="!isRecording" class="btn btn-danger" ng-click="stop()">RECORDING!!</button></h4>
+<pre>{{isRecording}}</pre>
+<h4><button class="btn btn-primary">PLAY</button></h4>
+<h4><button class="btn btn-danger">ERASE</button></h4>
 <div class="rack">
-	<keyboard tuning="tuning"></keyboard>
+	<keyboard filter="filter" isRecording="isRecording" tuning="tuning" ng-repeat="kybd in _.range(0, 5)"></keyboard>
 </div>
-<pre>{{synths}}</pre>
 </section>

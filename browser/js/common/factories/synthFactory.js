@@ -1,12 +1,23 @@
 app.factory("synthFactory", function(){
 
 	return {
-		makeSynth: function() {
-			return new Tone.PolySynth(2, Tone.MonoSynth).toMaster();
-		},
 
-		play: function(notes, duration) {
-			return this.triggerAttackRelease(notes, duration);
+		oscTypes: ["sine", "square", "sawtooth", "triangle", "pwm", "pulse"],
+
+		tunings: ["major", "minor", "balinese", "tembung", "selesir", "sunaren", "slendro"],
+
+		filtTypes: ["lowpass", "highpass", "bandpass", "lowshelf", "highshelf", "notch", "allpass", "peaking"],
+
+		durations: ["1n", "2n", "3n", "4n", "6n", "8n", "12n", "16n"],
+
+		instrumentTypes: ['gong', 'bass', 'reyong', 'keys', 'highkeys'],
+
+		params: {
+			'gong':['1', 3, 'sine', '1n', 'gong'],
+			'bass':['2', 8, "triangle", "2n", 'key'],
+			'reyong':['3', 15, "triangle", "16n", 'gong'],
+			'keys': ['3', 15, "sawtooth", "16n", 'key'],
+			'highkeys': ['4', 7, "pulse", "16n", 'key']
 		},
 
 		keyToId: {

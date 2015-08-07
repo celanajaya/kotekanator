@@ -1,33 +1,26 @@
-<div class="keyboard">
+<div class="keyboard" id="{{instrumentType}}">
 	<div class="control-panel">
-		<button ng-show="params.isOn" ng-click="toggleOn()" class="btn btn-success">ON</button>
-		<button ng-show="!params.isOn" ng-click="toggleOn()" class="btn btn-danger">OFF</button>
+		<button ng-show="isOn" ng-click="toggleOn()" class="btn btn-success">ON</button>
+		<button ng-show="!isOn" ng-click="toggleOn()" class="btn btn-danger">OFF</button>
+		Instrument Type: <select ng-model="instrumentType" ng-change="changeInstrument(instrumentType)">
+			<option ng-repeat="inst in instrumentTypes">{{inst}}</option>
+		</select>
 		Tuning: {{tuning}}
-		Octave: <select ng-model="params.octave">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>7</option>
-			<option>8</option>
+		Filter: {{filter}}
+		Octave: <select ng-model="octave">
+			<option ng-repeat="oct in octaves">{{oct}}</option>
 		</select>
-		Tone: <select ng-model="params.tone">
-			<option>sine</option>
-			<option>triangle</option>
-			<option>square</option>
-			<option>sawtooth</option>
+		Tone: <select ng-model="tone">
+			<option ng-repeat="osc in oscTypes">{{osc}}</option>
 		</select>
-		Instrument Range:<input ng-model="params.numKeys">
-		Duration: <select ng-model="params.duration">
-			<option value="16n">sixteenth note</option>
-			<option value="8n">eighth note</option>
-			<option value="4n">quarter note</option>
-			<option value="2n">half note</option>
-			<option value="1n">whole note</option>
+		Duration: <select ng-model="duration">
+			<option ng-repeat="dur in durations">{{dur}}</option>
+		</select>
+		Attack: <select ng-model="attack">
+			<option ng-repeat="att in attackTypes">{{att}}</option>
 		</select>
 	</div>
-	<touch-key note="{{synthFactory}}" index ="{{$index}}" num-keys ="params.numKeys" ng-repeat="key in _.range(1, params.numKeys + 1)"></touch-key>
-	<pre>{{params}}</pre>
+	<div class="keyTainer">
+		<div class="{{key}}" id="{{$index + 1}}" ng-class="{ active: iscurrentKey($index + 1) }" style="width:{{width}}%" ng-repeat="thing in _.range(0, numKeys)"></div>
+	</div>
 </div>

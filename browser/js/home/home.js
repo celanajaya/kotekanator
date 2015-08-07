@@ -6,24 +6,30 @@ app.config(function ($stateProvider) {
     });
 
     $stateProvider.state('home.record', {
-    	url: '/record',
-    	templateUrl: 'js/home/record.html'
+		url: '/record',
+		templateUrl: 'js/home/record.html'
     });
 });
 
-app.controller("MAINCTRL", function($scope){
+app.controller("MAINCTRL", function($scope, synthFactory, logicFactory){
+	$scope._ = _;
 	$scope.tuning = "minor";
-	$scope.synths = [];
-	$scope.home = document.getElementsByClassName("home")[0];
-	
-	$scope.addSynth = function() {
-		var el = document.createElement("keyboard");
-		home.appendChild(el);
-		$scope.synths.push(el);
+	$scope.filter = "lowpass";
+	$scope.tunings = synthFactory.tunings;
+	$scope.filtTypes = synthFactory.filtTypes;
+	$scope.isRecording = false;
+	$scope.pokok = logicFactory.pokok;
+
+	$scope.record = function() {
+		$scope.isRecording = true;
 	};
-	
-	$scope.removeSynth = function() {
-		var home = document.getElementById("home");
-		home.removeChild(home.childNodes[0]);
+
+	$scope.stop = function() {
+		$scope.isRecording = false;
 	}
-})
+
+	$scope.erase = function() {
+		logicFactory.pokok = [];
+	};
+
+});
