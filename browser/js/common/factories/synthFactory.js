@@ -10,13 +10,16 @@ app.factory("synthFactory", function(){
 
 		durations: ["1n", "2n", "3n", "4n", "6n", "8n", "12n", "16n"],
 
-		instrumentTypes: ['gong', 'bass', 'reyong', 'keys', 'highkeys'],
+		instrumentTypes: ['gong', 'bass', 'main', 'reyong', 'keys', 'highkeys'],
+
+		attackTypes: ['0', '0.25', '0.5', '0.75', '1'],
 
 		params: {
 			'gong':['1', 3, 'sine', '1n', 'gong'],
-			'bass':['2', 8, "triangle", "2n", 'key'],
+			'bass':['2', 8, "sine", "2n", 'key'],
+			'main': ['3', 8, "sine", "4n", 'key'],
 			'reyong':['3', 15, "triangle", "16n", 'gong'],
-			'keys': ['3', 15, "sawtooth", "16n", 'key'],
+			'keys': ['3', 15, "pulse", "16n", 'key'],
 			'highkeys': ['4', 7, "pulse", "16n", 'key']
 		},
 
@@ -146,65 +149,8 @@ app.factory("synthFactory", function(){
 			9: "G#",
 			10: "B",
 			11: "C#"
-		},
-
-		setSequence: function(arr, duration, synth){
-			var time = "0:0:0";
-			var num = arr.length;
-			var increment = function(t, d) {
-				var bar = t[0];
-				var beat = t[2];
-				var sixteenth = t[4];
-				console.log(bar, beat, sixteenth);
-				if (d === "1n") {
-					bar = (parseInt(bar) + 1);
-					bar = bar.toString();
-				}
-				if (d === "2n") {
-					bar = parseInt(bar);
-					beat = (parseInt(beat) + 2) % 4;
-					if (beat === 0) bar += 1;
-					bar = bar.toString();
-					beat = beat.toString();
-				}
-				if (d === "4n") {
-					bar = parseInt(bar);
-					beat = (parseInt(beat) + 1) % 4;
-					if (beat === 0) bar += 1;
-					bar = bar.toString();
-					beat = beat.toString();
-				}
-				if (d === "8n") {
-					bar = parseInt(bar);
-					beat = (parseInt(beat) + 1) % 4;
-					sixteenth = (parseInt(sixteenth) + 2) % 4;
-					if (sixteenth === 0) beat = (beat + 1) % 4;
-					if (beat === 0) bar += 1;
-					bar = bar.toString();
-					beat = beat.toString();
-					sixteenth = sixteenth.toString();
-				}
-				if (d === "16n") {
-					bar = parseInt(bar);
-					beat = (parseInt(beat) + 1) % 4;
-					sixteenth = (parseInt(sixteenth) + 1) % 4;
-					if (sixteenth === 0) beat = (beat + 1) % 4;
-					if (beat === 0) bar += 1;
-					bar = bar.toString();
-					beat = beat.toString();
-					sixteenth = sixteenth.toString();
-				}
-				return bar + ":" + beat + ":" + sixteenth;
-			};
-			while(num > 0) {
-
-				Tone.Transport.setTimeout(function(){
-					synth.triggerAttackRelease(arr[j], 0.25);
-				}, 125);
-
-				num--
-			}
 		}
-	}
+
+	};
 });
 

@@ -1,18 +1,7 @@
 app.factory("logicFactory", function(){
-	
-	return {
-
-		norot: function(arr) {
-			var x = arr[0];
-			var y = arr[0] + 1;
-			var z = arr[1];
-			var w = arr[1] + 1;
-
-			return [z,y,x,y,x,z,z,w];
-		},
-
-		"telu": {
+	var telufunc = 	{
 			move: function(arr) {
+				var w = arr[0];
 				var z = arr[1];
 				var x, y;
 				if (arr[0] > arr[1]) {
@@ -22,26 +11,39 @@ app.factory("logicFactory", function(){
 					y = arr[1] + 1;
 					x = arr[1] + 2;
 				}
-				return [z,y,z,x,y,z,x,y];
+				return [x,y,z,x,y,z,x,y];
 			},
 			stay: function(arr) {
 				var x = arr[0];
 				var y = arr[0] + 1;
 				var z = arr[0] + 2;
-				return [z,x,y,z,x,z,y,x];
+				return [x,y,z,x,z,y,x,z];
 			}
+		}
+
+	return {
+
+		norot: function(arr) {
+			var x = arr[0];
+			var y = arr[0] + 1;
+			var z = arr[1];
+			var w = arr[1] + 1;
+
+			return [x,y,x,y,x,z,z,w];
 		},
 
-		"empat": {
+		telu: telufunc,
+
+		empat: {
 			move: function(arr) {
-				var teluArr = this.telu.move(arr);
+				var teluArr = telufunc.move(arr);
 				for (var i = 0; i < teluArr.length; i++) {
 					if (i % 3 === 2) teluArr[i] = [teluArr[i], teluArr[i] + 4];
 				}
 				return teluArr;
 			},
 			stay: function(arr) {
-				var teluArr = this.telu.stay(arr);
+				var teluArr = telufunc.stay(arr);
 				for (var i = 0; i < teluArr.length; i++) {
 					if (i % 3 === 2) teluArr[i] = [teluArr[i], teluArr[i] + 4];
 				}
@@ -49,7 +51,7 @@ app.factory("logicFactory", function(){
 			}
 		},
 
-		"nyogCag": {
+		nyogCag: {
 			move: function(arr) {
 				var z = arr[0];
 				var w, x, y;

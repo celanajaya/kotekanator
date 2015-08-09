@@ -2,6 +2,7 @@
 	<div class="control-panel">
 		<button ng-show="isOn" ng-click="toggleOn()" class="btn btn-success">ON</button>
 		<button ng-show="!isOn" ng-click="toggleOn()" class="btn btn-danger">OFF</button>
+		<button ng-click="erase()" class="btn btn-danger">ERASE</button>
 		Instrument Type: <select ng-model="instrumentType" ng-change="changeInstrument(instrumentType)">
 			<option ng-repeat="inst in instrumentTypes">{{inst}}</option>
 		</select>
@@ -22,6 +23,8 @@
 		Behavior: <select ng-model="behavior">
 			<option ng-repeat="behav in behaviors">{{behav}}</option>
 		</select>
+		Skeleton: {{skeleton}}
+		Elaboration: {{elaboration}}
 	</div>
 	<div class="keyTainer">
 		<div class="{{key}}" id="{{$index + 1}}" ng-class="{ active: isCurrentKey($index + 1) }" style="width:{{width}}%" ng-repeat="thing in _.range(0, numKeys)"></div>

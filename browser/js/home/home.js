@@ -13,8 +13,8 @@ app.controller("MAINCTRL", function($scope, synthFactory, logicFactory){
 	$scope.tunings = synthFactory.tunings;
 	$scope.filtTypes = synthFactory.filtTypes;
 	$scope.isRecording = false;
-	$scope.isNotPlaying = true;
-	$scope.skeleton = [];
+	$scope.isPlaying = false;
+	$scope.bpm = 120;
 
 	$scope.record = function() {
 		$scope.isRecording = true;
@@ -22,15 +22,13 @@ app.controller("MAINCTRL", function($scope, synthFactory, logicFactory){
 
 	$scope.stop = function() {
 		$scope.isRecording = false;
-		$scope.isNotPlaying = true;
+		$scope.isPlaying = false;
+		Tone.Transport.stop();
 	};
 
 	$scope.play = function() {
-		$scope.isNotPlaying = false;
-	};
-
-	$scope.erase = function() {
-		$scope.skeleton = [];
+		$scope.isPlaying = true;
+		Tone.Transport.start();
 	};
 
 	Tone.Transport.loop = true;
