@@ -117,7 +117,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 		var beats = $scope.skeleton.length;
 		Tone.Transport.loopEnd = $scope.getlooplength(beats);
 		Tone.Transport.loop = true;
-		Tone.Transport.bpm.value = 120;
+		Tone.Transport.bpm.value = $scope.bpm;
 
 		//set interval to loop over every note and play correct sounds
 		//pArr takes the current transport position and arrIndex converts that into the 
