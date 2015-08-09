@@ -83,11 +83,19 @@ app.factory("logicFactory", function(){
 		},
 
 		bass: function(arr) {
-			return arr[0];
+			return [arr[0],0,0,0,0,0,0,0];
 		},
 
 		gong: function() {
-			return [1,3,2,1];
+			return [1,0,0,0,3,0,0,0,2,0,0,0,1,0,0,0];
+		},
+
+		padded: function(skel) {
+			var arr = [];
+			skel.forEach(function(note){
+				arr.push(note, 0, 0, 0);
+			});
+			return arr;
 		}
 	};
 

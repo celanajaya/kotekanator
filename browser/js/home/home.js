@@ -31,5 +31,10 @@ app.controller("MAINCTRL", function($scope, synthFactory, logicFactory){
 		Tone.Transport.start();
 	};
 
+	// window.addEventListener("keydown", function(e){
+	// 	if (e.keyCode === 70) $scope.nextMode();
+	// 	if (e.keyCode === 68) $scope.lastMode();
+	// });
+
 	Tone.Transport.loop = true;
 });

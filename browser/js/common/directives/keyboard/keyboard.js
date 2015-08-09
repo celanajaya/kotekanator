@@ -13,7 +13,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 	$scope.octaves = ['1','2','3','4','5','6'];
 	$scope.octave = '3';
 	$scope.tone = "sine";
-	$scope.duration = "16n";
+	$scope.duration = "4n";
 	$scope.instrumentType = "keys";
 	$scope.attack = '0.25';
 	$scope.attackTypes = synthFactory.attackTypes;
@@ -45,7 +45,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 		var bars = Math.floor(beats/4);
 		var beats = beats % 4;
 		return "" + bars + ":" + "" + beats + ":0";
-	}
+	};
 
 	$scope.synth = new Tone.PolySynth(4, Tone.MonoSynth).toMaster();
 
@@ -113,18 +113,23 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 	};
 
 	//sets the transport loop to play the notes in sequence...DOESN'T FUCKING WORK!
-	$scope.setSequence = function (seq) {
-		var beats = Math.floor($scope.skeleton.length / 2);
+	$scope.setSequence = function () {
+		var beats = $scope.skeleton.length;
 		Tone.Transport.loopEnd = $scope.getlooplength(beats);
 		Tone.Transport.loop = true;
 		Tone.Transport.bpm.value = 120;
 
-		//set interval to loop over every quarternote and play correct sounds
+		//set interval to loop over every note and play correct sounds
+		//pArr takes the current transport position and arrIndex converts that into the 
+		//corresponding element in the elaboration 
 		Tone.Transport.setInterval(function () {
-			//get position to figure out what sub Array to play
-			var pArr = Tone.Transport.position.split(':');
-			var arrIndex = (parseInt(pArr[0])*4) + (parseInt(pArr[1]));
-			$scope.play(seq[arrIndex]);
+			var time = Tone.Transport.position.split(':');
+			console.log(time);
+			var bar = parseInt(time[0] * 16);
+			var beat = parseInt(time[1] * 4);
+			var sixteenth = parseInt(time[2]);
+			var arrIndex = (bar + beat + sixteenth);
+			$scope.play($scope.elaboration[arrIndex]);
 		}, $scope.duration);
 
 		return $scope.synth;
@@ -136,9 +141,9 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 		var keyNum = synthFactory.keyToId[letterCode];
 		if ($scope.isRecording && $scope.isOn && keyNum) {
 			$scope.skeleton.push(keyNum);
-			if ($scope.behavior === "none") $scope.elaboration = $scope.skeleton;
+			if ($scope.behavior === "none") $scope.elaboration = logicFactory.padded($scope.skeleton);
 			else $scope.elaboration = $scope.getElaborations($scope.parsedSkel());
-			$scope.setSequence($scope.elaboration);
+			$scope.setSequence();
 		}
 		$scope.play(keyNum);
 		$scope.$digest();
