@@ -146,7 +146,65 @@ app.factory("synthFactory", function(){
 			9: "G#",
 			10: "B",
 			11: "C#"
-		}
-	};
+		},
 
+		setSequence: function(arr, duration, synth){
+			var time = "0:0:0";
+			var num = arr.length;
+			var increment = function(t, d) {
+				var bar = t[0];
+				var beat = t[2];
+				var sixteenth = t[4];
+				console.log(bar, beat, sixteenth);
+				if (d === "1n") {
+					bar = (parseInt(bar) + 1);
+					bar = bar.toString();
+				}
+				if (d === "2n") {
+					bar = parseInt(bar);
+					beat = (parseInt(beat) + 2) % 4;
+					if (beat === 0) bar += 1;
+					bar = bar.toString();
+					beat = beat.toString();
+				}
+				if (d === "4n") {
+					bar = parseInt(bar);
+					beat = (parseInt(beat) + 1) % 4;
+					if (beat === 0) bar += 1;
+					bar = bar.toString();
+					beat = beat.toString();
+				}
+				if (d === "8n") {
+					bar = parseInt(bar);
+					beat = (parseInt(beat) + 1) % 4;
+					sixteenth = (parseInt(sixteenth) + 2) % 4;
+					if (sixteenth === 0) beat = (beat + 1) % 4;
+					if (beat === 0) bar += 1;
+					bar = bar.toString();
+					beat = beat.toString();
+					sixteenth = sixteenth.toString();
+				}
+				if (d === "16n") {
+					bar = parseInt(bar);
+					beat = (parseInt(beat) + 1) % 4;
+					sixteenth = (parseInt(sixteenth) + 1) % 4;
+					if (sixteenth === 0) beat = (beat + 1) % 4;
+					if (beat === 0) bar += 1;
+					bar = bar.toString();
+					beat = beat.toString();
+					sixteenth = sixteenth.toString();
+				}
+				return bar + ":" + beat + ":" + sixteenth;
+			};
+			while(num > 0) {
+
+				Tone.Transport.setTimeout(function(){
+					synth.triggerAttackRelease(arr[j], 0.25);
+				}, 125);
+
+				num--
+			}
+		}
+	}
 });
+

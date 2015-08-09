@@ -19,8 +19,11 @@
 		Attack: <select ng-model="attack">
 			<option ng-repeat="att in attackTypes">{{att}}</option>
 		</select>
+		Behavior: <select ng-model="behavior">
+			<option ng-repeat="behav in behaviors">{{behav}}</option>
+		</select>
 	</div>
 	<div class="keyTainer">
-		<div class="{{key}}" id="{{$index + 1}}" ng-class="{ active: iscurrentKey($index + 1) }" style="width:{{width}}%" ng-repeat="thing in _.range(0, numKeys)"></div>
+		<div class="{{key}}" id="{{$index + 1}}" ng-class="{ active: isCurrentKey($index + 1) }" style="width:{{width}}%" ng-repeat="thing in _.range(0, numKeys)"></div>
 	</div>
 </div>

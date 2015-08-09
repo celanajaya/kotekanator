@@ -4,11 +4,6 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/home/home.html',
         controller: "MAINCTRL"
     });
-
-    $stateProvider.state('home.record', {
-		url: '/record',
-		templateUrl: 'js/home/record.html'
-    });
 });
 
 app.controller("MAINCTRL", function($scope, synthFactory, logicFactory){
@@ -18,7 +13,8 @@ app.controller("MAINCTRL", function($scope, synthFactory, logicFactory){
 	$scope.tunings = synthFactory.tunings;
 	$scope.filtTypes = synthFactory.filtTypes;
 	$scope.isRecording = false;
-	$scope.pokok = logicFactory.pokok;
+	$scope.isNotPlaying = true;
+	$scope.skeleton = [];
 
 	$scope.record = function() {
 		$scope.isRecording = true;
@@ -26,10 +22,16 @@ app.controller("MAINCTRL", function($scope, synthFactory, logicFactory){
 
 	$scope.stop = function() {
 		$scope.isRecording = false;
-	}
-
-	$scope.erase = function() {
-		logicFactory.pokok = [];
+		$scope.isNotPlaying = true;
 	};
 
+	$scope.play = function() {
+		$scope.isNotPlaying = false;
+	};
+
+	$scope.erase = function() {
+		$scope.skeleton = [];
+	};
+
+	Tone.Transport.loop = true;
 });
