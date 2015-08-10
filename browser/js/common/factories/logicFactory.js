@@ -5,29 +5,29 @@ app.factory("logicFactory", function(){
 				var z = arr[1];
 				var x, y;
 				if (arr[0] > arr[1]) {
-					y = arr[1] - 1;
-					x = arr[1] - 2;
+					y = (arr[1] - 1) % 15;
+					x = (arr[1] - 2) % 15;
 				} else {
-					y = arr[1] + 1;
-					x = arr[1] + 2;
+					y = (arr[1] + 1) % 15;
+					x = (arr[1] + 2) % 15;
 				}
 				return [x,y,z,x,y,z,x,y];
 			},
 			stay: function(arr) {
 				var x = arr[0];
-				var y = arr[0] + 1;
-				var z = arr[0] + 2;
+				var	y = (arr[1] + 1) % 15;
+				var	z = (arr[1] + 2) % 15;
 				return [x,y,z,x,z,y,x,z];
 			}
-		}
+		};
 
 	return {
 
 		norot: function(arr) {
 			var x = arr[0];
-			var y = arr[0] + 1;
+			var y = (arr[0] + 1) % 15;
 			var z = arr[1];
-			var w = arr[1] + 1;
+			var w = (arr[1] + 1) % 15;
 
 			return [x,y,x,y,x,z,z,w];
 		},
@@ -38,14 +38,14 @@ app.factory("logicFactory", function(){
 			move: function(arr) {
 				var teluArr = telufunc.move(arr);
 				for (var i = 0; i < teluArr.length; i++) {
-					if (i % 3 === 2) teluArr[i] = [teluArr[i], teluArr[i] + 4];
+					if (i % 3 === 2) teluArr[i] = [teluArr[i], (teluArr[i] + 4) % 15];
 				}
 				return teluArr;
 			},
 			stay: function(arr) {
 				var teluArr = telufunc.stay(arr);
 				for (var i = 0; i < teluArr.length; i++) {
-					if (i % 3 === 2) teluArr[i] = [teluArr[i], teluArr[i] + 4];
+					if (i % 3 === 2) teluArr[i] = [teluArr[i], (teluArr[i] + 4) % 15];
 				}
 				return teluArr;
 			}
@@ -56,13 +56,13 @@ app.factory("logicFactory", function(){
 				var z = arr[0];
 				var w, x, y;
 				if (arr[0] > arr[1]) {
-					y = arr[1] - 1;
-					x = arr[1] - 2;
-					w = arr[1] - 3;
+					y = (arr[1] - 1) % 15;
+					x = (arr[1] - 2) % 15;
+					w = (arr[1] - 3) % 15;
 				} else {
-					y = arr[1] + 1;
-					x = arr[1] + 2;
-					w = arr[1] + 3;
+					y = (arr[1] + 1) % 15;
+					x = (arr[1] + 2) % 15;
+					w = (arr[1] + 3) % 15;
 				}
 				var options = [[z,y,z,y,z,w,x,y], [z,y,z,x,y,w,x,y]];
 
@@ -71,10 +71,10 @@ app.factory("logicFactory", function(){
 
 			stay: function(arr) {
 				var y = arr[0];
-				var z = arr[0] + 1;
-				var a = arr[0] + 2;
-				var x = arr[0] - 1;
-				var w = arr[0] - 2;
+				var z = (arr[0] + 1) % 15;
+				var a = (arr[0] + 2) % 15;
+				var x = (arr[0] - 1) % 15;
+				var w = (arr[0] - 2) % 15;
 
 				var options = [[y,z,y,z,y,x,w,x], [y,z,a,z,y,x,w,x]];
 
@@ -96,6 +96,21 @@ app.factory("logicFactory", function(){
 				arr.push(note, 0, 0, 0);
 			});
 			return arr;
+		},
+
+		arpeggiator: {
+			move: function(arr) {
+				var x = arr[0];
+				var y = (arr[1] + 3) % 15;
+				var z = (arr[1] + 5) % 15; 
+				return [x,y,z,x,y,z,y,z];
+			},
+			stay: function(arr) {
+				var x = arr[0];
+				var y = (arr[1] + 3) % 15;
+				var z = (arr[1] + 5) % 15;
+				return [x,z,y,z,x,z,y,z]; 
+			}
 		}
 	};
 

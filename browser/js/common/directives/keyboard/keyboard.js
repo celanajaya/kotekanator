@@ -23,7 +23,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 	$scope.instrumentTypes = synthFactory.instrumentTypes;
 	$scope.width = 100 / $scope.numKeys;
 	$scope.current = 0;
-	$scope.behaviors = ["none","norot", "telu", "empat", "nyogCag", "bass", "gong"];
+	$scope.behaviors = ["none","arpeggiator", "norot", "telu", "empat", "nyogCag", "bass", "gong"];
 	$scope.behavior = 'none';
 	$scope.skeleton = [];
 	$scope.elaboration = [];
@@ -90,6 +90,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 	//main player function, takes a key number, determines the right octave and converts to a 
 	//musical letter name based on the assigned tuning
 	$scope.play = function(key) {
+		if (Array.isArray(key)) key = key[0];
 		this.current = key;
 		if (key && $scope.isOn) {
 			var oct = parseInt($scope.octave);
