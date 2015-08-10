@@ -1,17 +1,16 @@
 <section id="home">
-
 <h4>Tuning:<select ng-model="tuning"></h4>
 	<option ng-repeat="scale in tunings">{{scale}}</option>
 </select>
 <h4>Add Filter:<select ng-model="filter"></h4>
 	<option ng-repeat="filt in filtTypes">{{filt}}</option>
 </select>
+<h4>Select Speed:<input ng-model="bpm">bpm</h4>
 <h4><button ng-hide="isRecording" class="btn btn-success" ng-click="record()">RECORD</button></h4>
-<h4><button ng-hide="!isRecording" class="btn btn-danger" ng-click="stop()">RECORDING!!</button></h4>
-<pre>{{isRecording}}</pre>
-<h4><button class="btn btn-primary">PLAY</button></h4>
-<h4><button class="btn btn-danger">ERASE</button></h4>
+<h4><button ng-hide="!isRecording" class="btn btn-danger" ng-click="stop()">RECORDING</button></h4>
+<h4><button ng-hide="isPlaying" class="btn btn-primary" ng-click="play()">PLAY</button></h4>
+<h4><button ng-hide="!isPlaying" class="btn btn-danger" ng-click="stop()">STOP</button></h4>
 <div class="rack">
-	<keyboard filter="filter" isRecording="isRecording" tuning="tuning" ng-repeat="kybd in _.range(0, 5)"></keyboard>
+	<keyboard ng-repeat="kybd in _.range(0, 5)"></keyboard>
 </div>
 </section>

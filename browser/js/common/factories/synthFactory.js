@@ -10,13 +10,16 @@ app.factory("synthFactory", function(){
 
 		durations: ["1n", "2n", "3n", "4n", "6n", "8n", "12n", "16n"],
 
-		instrumentTypes: ['gong', 'bass', 'reyong', 'keys', 'highkeys'],
+		instrumentTypes: ['gong', 'bass', 'main', 'reyong', 'keys', 'highkeys'],
+
+		attackTypes: ['0', '0.25', '0.5', '0.75', '1'],
 
 		params: {
 			'gong':['1', 3, 'sine', '1n', 'gong'],
-			'bass':['2', 8, "triangle", "2n", 'key'],
+			'bass':['2', 8, "sine", "2n", 'key'],
+			'main': ['3', 8, "sine", "4n", 'key'],
 			'reyong':['3', 15, "triangle", "16n", 'gong'],
-			'keys': ['3', 15, "sawtooth", "16n", 'key'],
+			'keys': ['3', 15, "pulse", "16n", 'key'],
 			'highkeys': ['4', 7, "pulse", "16n", 'key']
 		},
 
@@ -147,6 +150,7 @@ app.factory("synthFactory", function(){
 			10: "B",
 			11: "C#"
 		}
-	};
 
+	};
 });
+
