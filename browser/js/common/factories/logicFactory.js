@@ -25,9 +25,9 @@ app.factory("logicFactory", function(){
 
 		norot: function(arr) {
 			var x = arr[0];
-			var y = (arr[0] + 1) % 15;
+			var y = (arr[0] + 1) % 8;
 			var z = arr[1];
-			var w = (arr[1] + 1) % 15;
+			var w = (arr[1] + 1) % 8;
 
 			return [x,y,x,y,x,z,z,w];
 		},
@@ -56,13 +56,13 @@ app.factory("logicFactory", function(){
 				var z = arr[0];
 				var w, x, y;
 				if (arr[0] > arr[1]) {
-					y = (arr[1] - 1) % 15;
-					x = (arr[1] - 2) % 15;
-					w = (arr[1] - 3) % 15;
+					y = (arr[1] - 1) % 8;
+					x = (arr[1] - 2) % 8;
+					w = (arr[1] - 3) % 8;
 				} else {
-					y = (arr[1] + 1) % 15;
-					x = (arr[1] + 2) % 15;
-					w = (arr[1] + 3) % 15;
+					y = (arr[1] + 1) % 8;
+					x = (arr[1] + 2) % 8;
+					w = (arr[1] + 3) % 8;
 				}
 				var options = [[z,y,z,y,z,w,x,y], [z,y,z,x,y,w,x,y]];
 
@@ -71,10 +71,10 @@ app.factory("logicFactory", function(){
 
 			stay: function(arr) {
 				var y = arr[0];
-				var z = (arr[0] + 1) % 15;
-				var a = (arr[0] + 2) % 15;
-				var x = (arr[0] - 1) % 15;
-				var w = (arr[0] - 2) % 15;
+				var z = (arr[0] + 1) % 8;
+				var a = (arr[0] + 2) % 8;
+				var x = (arr[0] - 1) % 8;
+				var w = (arr[0] - 2) % 8;
 
 				var options = [[y,z,y,z,y,x,w,x], [y,z,a,z,y,x,w,x]];
 
@@ -83,11 +83,11 @@ app.factory("logicFactory", function(){
 		},
 
 		bass: function(arr) {
-			return [arr[0],0,0,0,0,0,0,0];
+			return [arr[0],0,0,0];
 		},
 
 		gong: function() {
-			return [1,0,0,0,3,0,0,0,2,0,0,0,1,0,0,0];
+			return [arr[0],0,0,0];
 		},
 
 		padded: function(skel) {
@@ -101,15 +101,30 @@ app.factory("logicFactory", function(){
 		arpeggiator: {
 			move: function(arr) {
 				var x = arr[0];
-				var y = (arr[1] + 3) % 15;
-				var z = (arr[1] + 5) % 15; 
+				var y = (arr[1] + 3) % 8;
+				var z = (arr[1] + 5) % 8; 
 				return [x,y,z,x,y,z,y,z];
 			},
 			stay: function(arr) {
 				var x = arr[0];
-				var y = (arr[1] + 3) % 15;
-				var z = (arr[1] + 5) % 15;
+				var y = (arr[1] + 3) % 8;
+				var z = (arr[1] + 5) % 8;
 				return [x,z,y,z,x,z,y,z]; 
+			}
+		},
+
+		harmonizer: {
+			move: function(arr) {
+				var x = arr[0];
+				var y = arr[0] + 3;
+				var z = arr[0] + 5;
+				return [[x,y,z]];
+			},
+			stay: function(arr) {
+				var x = arr[0];
+				var y = arr[0] + 3;
+				var z = arr[0] + 5;
+				return [[x,y,z]];
 			}
 		}
 	};

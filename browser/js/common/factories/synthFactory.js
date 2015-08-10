@@ -4,7 +4,7 @@ app.factory("synthFactory", function(){
 
 		oscTypes: ["sine", "square", "sawtooth", "triangle", "pwm", "pulse"],
 
-		tunings: ["major", "minor", "balinese", "tembung", "selesir", "sunaren", "slendro"],
+		tunings: ["major", "minor", "balinese", "tembung", "selesir", "sunaren", "slendro", "alit"],
 
 		filtTypes: ["lowpass", "highpass", "bandpass", "lowshelf", "highshelf", "notch", "allpass", "peaking"],
 
@@ -15,12 +15,12 @@ app.factory("synthFactory", function(){
 		attackTypes: ['0', '0.25', '0.5', '0.75', '1'],
 
 		params: {
-			'gong':['1', 3, 'sine', '1n', 'gong'],
-			'bass':['2', 8, "sine", "2n", 'key'],
-			'main': ['3', 8, "sine", "4n", 'key'],
-			'reyong':['3', 15, "triangle", "16n", 'gong'],
-			'keys': ['3', 15, "pulse", "16n", 'key'],
-			'highkeys': ['4', 7, "pulse", "16n", 'key']
+			'gong':['1', 3, 'sine', '1n', 'gong', 'gong'],
+			'bass':['2', 8, "sine", "2n", 'key', 'bass'],
+			'main': ['3', 8, "sine", "4n", 'key', 'bass'],
+			'reyong':['3', 15, "triangle", "16n", 'gong', "norot"],
+			'keys': ['3', 15, "pulse", "16n", 'key', 'telu'],
+			'highkeys': ['4', 7, "pulse", "16n", 'key', 'telu']
 		},
 
 		keyToId: {
@@ -145,6 +145,20 @@ app.factory("synthFactory", function(){
 			5: "B",
 			6: "C#",
 			7: "E",
+			8: "F#",
+			9: "G#",
+			10: "B",
+			11: "C#"
+		},
+
+		alit: {
+			1: "C#",
+			2: "D",
+			3: "F#",
+			4: "G#",
+			5: "B",
+			6: "C#",
+			7: "D",
 			8: "F#",
 			9: "G#",
 			10: "B",

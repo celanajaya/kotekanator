@@ -23,7 +23,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 	$scope.instrumentTypes = synthFactory.instrumentTypes;
 	$scope.width = 100 / $scope.numKeys;
 	$scope.current = 0;
-	$scope.behaviors = ["none","arpeggiator", "norot", "telu", "empat", "nyogCag", "bass", "gong"];
+	$scope.behaviors = ["none","arpeggiator", "norot", "telu", "empat", "nyogCag", "bass", "gong", "harmonizer"];
 	$scope.behavior = 'none';
 	$scope.skeleton = [];
 	$scope.elaboration = [];
@@ -43,13 +43,13 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 
 	$scope.getlooplength = function(beats) {
 		var bars = Math.floor(beats/4);
-		var beats = beats % 4;
+		beats = beats % 4;
 		return "" + bars + ":" + "" + beats + ":0";
 	};
 
 	$scope.synth = new Tone.PolySynth(4, Tone.MonoSynth).toMaster();
 
-	//synthFactor.params order: octave, range, oscillator, duration
+	//synthFactory.params order: octave, range, oscillator, duration
 	$scope.changeInstrument = function(inst) {
 		_.forOwn(synthFactory.params, function(value, key){
 			if (key === inst) {
@@ -58,9 +58,8 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 				$scope.tone = value[2];
 				$scope.duration = value[3];
 				$scope.key = value[4];
+				$scope.behavior = value[5];
 			}
-			if (key === "gong") $scope.behavior = key;
-			if (key === "bass") $scope.behavior = key;
 		});
 	};
 
@@ -92,6 +91,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 	$scope.play = function(key) {
 		if (Array.isArray(key)) key = key[0];
 		this.current = key;
+		$scope.$digest();
 		if (key && $scope.isOn) {
 			var oct = parseInt($scope.octave);
 			oct = key < 7 ? oct : (oct + 1);
@@ -121,7 +121,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 		Tone.Transport.bpm.value = 120;
 
 		//set interval to loop over every note and play correct sounds
-		//pArr takes the current transport position and arrIndex converts that into the 
+		//time captures current transport position and arrIndex converts that into the 
 		//corresponding element in the elaboration 
 		Tone.Transport.setInterval(function () {
 			var time = Tone.Transport.position.split(':');
@@ -163,7 +163,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 		}
 	});
 
-	window.addEventListener("mouseup", function(e){
+	window.addEventListener("mouseup", function(){
 		$scope.current = [];
 		$scope.$digest();
 	});
