@@ -3,6 +3,7 @@
 		<button ng-show="isOn" ng-click="toggleOn()" class="btn btn-success">ON</button>
 		<button ng-show="!isOn" ng-click="toggleOn()" class="btn btn-danger">OFF</button>
 		<button ng-click="erase()" class="btn btn-danger">ERASE</button>
+		<button ng-audio-hover="audio/01_jublag.WAV">TEST</button>
 		Instrument Type: <select ng-model="instrumentType" ng-change="changeInstrument(instrumentType)">
 			<option ng-repeat="inst in instrumentTypes">{{inst}}</option>
 		</select>

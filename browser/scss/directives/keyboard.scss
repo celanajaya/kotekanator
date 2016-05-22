@@ -2,9 +2,9 @@
 	width: 100%;
 
 	.control-panel {
-		border: 1px solid black;
+		border: 2px solid white;
 		border-radius: 3px; 
-		background-color: lightBlue; 
+		background-color: black; 
 
 		.off {
 			opacity: 0.5;
@@ -31,31 +31,32 @@
 	}
 
 	.key {
-		border: 1px solid black;
+		border: 2px solid white;
 		border-radius: 3px;
 		height: 8vh;
-		background-color: gainsboro;
+		background-color: black;
+		margin: 3px;
 		
 		&:hover {
-			background-color: pink;
+			background-color: white;
 		}
 		
 	}
 
 	.gong {
 		display: inline;
-		border: 1px solid black;
+		border: 2px solid white;
 		border-radius: 100%;
 		height: 8vh;
-		background-color: gainsboro;
+		background-color: black;
 		
 		&:hover {
-			background-color: pink;
+			background-color: white;
 		}
 		
 	}
 
 	.active {
-		background-color: pink;
+		background-color: white;
 	}
 }

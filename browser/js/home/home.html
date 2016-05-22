@@ -6,10 +6,14 @@
 	<option ng-repeat="filt in filtTypes">{{filt}}</option>
 </select>
 <h4>Select Speed:<input ng-model="bpm">bpm</h4>
-<h4><button ng-hide="isRecording" class="btn btn-success" ng-click="record()">RECORD</button></h4>
-<h4><button ng-hide="!isRecording" class="btn btn-danger" ng-click="stop()">RECORDING</button></h4>
-<h4><button ng-hide="isPlaying" class="btn btn-primary" ng-click="play()">PLAY</button></h4>
-<h4><button ng-hide="!isPlaying" class="btn btn-danger" ng-click="stop()">STOP</button></h4>
+<div class="container">
+	<div class="row col-lg-12">
+		<button ng-hide="isRecording" class="btn btn-danger" ng-click="record()"><i class="fa fa-circle" aria-hidden="true"></i></button>
+		<button ng-hide="!isRecording" class="btn btn-danger" ng-click="stop()">RECORDING</button></h4>
+		<button ng-hide="isPlaying" class="btn btn-primary" ng-click="play()"><i class="fa fa-play" aria-hidden="true"></i></span></button>
+		<button ng-hide="!isPlaying" class="btn btn-danger" ng-click="stop()"><i class="fa fa-stop" aria-hidden="true"></i></button>
+	</div>
+</div>
 <div class="rack">
 	<keyboard ng-repeat="kybd in _.range(0, 5)"></keyboard>
 </div>

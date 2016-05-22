@@ -10,7 +10,7 @@ app.factory("synthFactory", function(){
 
 		durations: ["1n", "2n", "3n", "4n", "6n", "8n", "12n", "16n"],
 
-		instrumentTypes: ['gong', 'bass', 'main', 'reyong', 'keys', 'highkeys'],
+		instrumentTypes: ['gong', 'bass', 'main', 'reyong', 'keys', 'highkeys', 'gangsa'],
 
 		attackTypes: ['0', '0.25', '0.5', '0.75', '1'],
 

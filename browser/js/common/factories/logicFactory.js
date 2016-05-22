@@ -19,7 +19,7 @@ app.factory("logicFactory", function(){
 				var z = arr[0] + 2;
 				return [x,y,z,x,z,y,x,z];
 			}
-		}
+		};
 
 	return {
 
