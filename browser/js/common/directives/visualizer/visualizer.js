@@ -1,4 +1,4 @@
-app.directive('keyboard', function () {
+app.directive('visualizer', function () {
     return {
         restrict: 'E',
         templateUrl: 'js/common/directives/visualizer/visualizer.html',
@@ -7,7 +7,7 @@ app.directive('keyboard', function () {
 });
 
 
-app.controller("KYBDCTRL", function($scope){
+app.controller("VIZCTRL", function($scope){
 
 	var svgHeight = 500;
 	var svgWidth = 1400;

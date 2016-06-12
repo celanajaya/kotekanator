@@ -112,7 +112,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 		}
 	};
 
-	//sets the transport loop to play the notes in sequence...DOESN'T FUCKING WORK!
+	//sets the transport loop to play the notes in sequence
 	$scope.setSequence = function () {
 		var beats = $scope.skeleton.length;
 		Tone.Transport.loopEnd = $scope.getlooplength(beats);
@@ -124,7 +124,6 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 		//corresponding element in the elaboration 
 		Tone.Transport.setInterval(function () {
 			var time = Tone.Transport.position.split(':');
-			console.log(time);
 			var bar = parseInt(time[0] * 16);
 			var beat = parseInt(time[1] * 4);
 			var sixteenth = parseInt(time[2]);
@@ -133,7 +132,12 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 		}, $scope.duration);
 
 		return $scope.synth;
-	},
+	};
+
+	$scope.audioTest = function() {
+		var data = gamelanFactory.load("jublag", "01");
+		gamelanFactory.process(data);
+	}
 
 	//event listeners:
 	window.addEventListener("keydown", function(e){

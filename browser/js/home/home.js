@@ -11,10 +11,10 @@ app.controller("MAINCTRL", function($scope, synthFactory, logicFactory){
 	$scope.tuning = "minor";
 	$scope.filter = "lowpass";
 	$scope.tunings = synthFactory.tunings;
-	$scope.filtTypes = synthFactory.filtTypes;
 	$scope.isRecording = false;
 	$scope.isPlaying = false;
 	$scope.bpm = 120;
+	$scope.numKybds = 1;
 
 	$scope.record = function() {
 		$scope.isRecording = true;
@@ -29,6 +29,14 @@ app.controller("MAINCTRL", function($scope, synthFactory, logicFactory){
 	$scope.play = function() {
 		$scope.isPlaying = true;
 		Tone.Transport.start();
+	};
+
+	$scope.addKeyboard = function() {
+		$scope.numKybds += 1;
+	};
+
+	$scope.removeKeyboard = function() {
+		$scope.numKybds -= 1;
 	};
 
 	// window.addEventListener("keydown", function(e){
