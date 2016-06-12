@@ -3,11 +3,11 @@
 		<button ng-show="isOn" ng-click="toggleOn()" class="btn btn-success">ON</button>
 		<button ng-show="!isOn" ng-click="toggleOn()" class="btn btn-danger">OFF</button>
 		<button ng-click="erase()" class="btn btn-danger">ERASE</button>
+		<button ng-click="audioTest()" class="btn btn-danger">AUDIOTEST</button>
 		Instrument Type: <select ng-model="instrumentType" ng-change="changeInstrument(instrumentType)">
 			<option ng-repeat="inst in instrumentTypes">{{inst}}</option>
 		</select>
 		Tuning: {{tuning}}
-		Filter: {{filter}}
 		Octave: <select ng-model="octave">
 			<option ng-repeat="oct in octaves">{{oct}}</option>
 		</select>

@@ -6,7 +6,7 @@ app.directive('keyboard', function () {
     };
 });
 
-app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
+app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanFactory){
 	$scope._ = _;
 	$scope.isOn = true;
 	$scope.numKeys = 15;
@@ -99,7 +99,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 			if (synthFactory[$scope.tuning][key]) {
 				var keyArr = [];
 				keyArr[0] = synthFactory[$scope.tuning][key] + oct;
-				keyArr[1] = synthFactory[$scope.tuning][(key + 4) % $scope.numKeys] ? synthFactory[$scope.tuning][(key + 4) % $scope.numKeys] + oct : key;
+				// keyArr[1] = synthFactory[$scope.tuning][(key + 4) % $scope.numKeys] ? synthFactory[$scope.tuning][(key + 4) % $scope.numKeys] + oct : key;
 
 				$scope.synth.set(
 					{"oscillator": {"type": $scope.tone}},
@@ -135,9 +135,8 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory){
 	};
 
 	$scope.audioTest = function() {
-		var data = gamelanFactory.load("jublag", "01");
-		gamelanFactory.process(data);
-	}
+		gamelanFactory.load("01", "jublag");
+	};
 
 	//event listeners:
 	window.addEventListener("keydown", function(e){
