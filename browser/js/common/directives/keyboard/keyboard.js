@@ -90,7 +90,8 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 	//main player function, takes a key number, determines the right octave and converts to a 
 	//musical letter name based on the assigned tuning
 	$scope.play = function(key) {
-		this.current = key;
+		$scope.current = key;
+		$scope.$digest();
 		if (key && $scope.isOn) {
 			var oct = parseInt($scope.octave);
 			oct = key < 7 ? oct : (oct + 1);

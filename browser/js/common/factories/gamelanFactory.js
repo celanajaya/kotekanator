@@ -4,7 +4,7 @@ app.factory("gamelanFactory", function(){
 	return {
 	 	load: function(key, instrument) {
 			var request = new XMLHttpRequest();
-			request.open("GET", "api/audio/" + key + "_" + instrument + ".WAV", true);
+			request.open("GET", "/audio/" + key + "_" + instrument + ".WAV", true);
 			request.responseType = "arraybuffer";
 
 			var process = function(data) {
