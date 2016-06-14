@@ -6,8 +6,8 @@ navbar {
 
   display: block;
   background: #000;
-  border-bottom: 1px solid black;
-  box-shadow: 1px 1px 14px -3px black;
+  border-bottom: 1px solid $primary-color;
+  box-shadow: 1px 1px 14px -3px $primary-color;
 
   .container {
     width: 1340px;
@@ -40,7 +40,7 @@ navbar {
         color: transparent;
       }
       50% {
-        color: black;
+        color: $secondary-color;
       }
     }
 
@@ -49,7 +49,7 @@ navbar {
         color: transparent;
       }
       50% {
-        color: lime;
+        color: $secondary-color;
       }
     }
 
@@ -58,7 +58,7 @@ navbar {
         color: transparent;
       }
       50% {
-        color: lime;
+        color: $secondary-color;
       }
     }
 
@@ -67,7 +67,7 @@ navbar {
         color: transparent;
       }
       50% {
-        color: lime;
+        color: $secondary-color;
       }
     }
 
@@ -76,7 +76,7 @@ navbar {
         color: transparent;
       }
       50% {
-        color: lime;
+        color: $secondary-color;
       }
     }
   }

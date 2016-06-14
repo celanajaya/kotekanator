@@ -2,9 +2,9 @@
 	width: 100%;
 
 	.control-panel {
-		border: 2px solid white;
+		border: 2px solid $secondary-color;
 		border-radius: 3px; 
-		background-color: black; 
+		background-color: $primary-color; 
 
 		.off {
 			opacity: 0.5;
@@ -31,10 +31,10 @@
 	}
 
 	.key {
-		border: 1px solid white;
+		border: 1px solid $secondary-color;
 		border-radius: 5px;
 		height: 8vh;
-		background-color: black;
+		background-color: $primary-color;
 		margin-top: 5px;
 		
 		&:hover {
@@ -45,18 +45,18 @@
 
 	.gong {
 		display: inline;
-		border: 2px solid white;
+		border: 2px solid $secondary-color;
 		border-radius: 100%;
 		height: 8vh;
-		background-color: black;
+		background-color: $primary-color;
 		
 		&:hover {
-			background-color: white;
+			background-color: $secondary-color;
 		}
 		
 	}
 
 	.active {
-		background-color: white;
+		background-color: $secondary-color;
 	}
 }

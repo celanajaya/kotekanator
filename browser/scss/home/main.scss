@@ -6,14 +6,14 @@
   canvas {
   	height: 100px;
   	width: 700px;
-  	background-color: #fff;
-  	border-color: #eee;
+  	background-color: $primary-color;
+  	border-color: $secondary-color;
   }
 
   .btn {
-  	border-color: white;
-  	background-color: black;
-  	color: white;
+  	border-color: $secondary-color;
+  	background-color: $primary-color;
+  	color: $secondary-color;
   }
   
 }

@@ -22,7 +22,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 	$scope.durations = synthFactory.durations;
 	$scope.instrumentTypes = synthFactory.instrumentTypes;
 	$scope.width = 100 / $scope.numKeys;
-	$scope.current = 0;
+	$scope.currentKey = 0;
 	$scope.behaviors = ["none","norot", "telu", "empat", "nyogCag", "bass", "gong"];
 	$scope.behavior = 'none';
 	$scope.skeleton = [];
@@ -38,7 +38,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 	};
 
 	$scope.isCurrentKey = function(num) {
-		return num === $scope.current;
+		return num === $scope.currentKey;
 	};
 
 	$scope.getlooplength = function(beats) {
@@ -90,7 +90,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 	//main player function, takes a key number, determines the right octave and converts to a 
 	//musical letter name based on the assigned tuning
 	$scope.play = function(key) {
-		$scope.current = key;
+		$scope.currentKey = key;
 		$scope.$digest();
 		if (key && $scope.isOn) {
 			var oct = parseInt($scope.octave);
