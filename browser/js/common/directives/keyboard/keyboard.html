@@ -1,28 +1,15 @@
-<div class="keyboard" id="{{instrumentType}}">
+<div class="keyboard" id="{{instrumentTypes[5 - $index]}}">
 	<div class="control-panel">
 		<button ng-show="isOn" ng-click="toggleOn()" class="btn btn-success">ON</button>
 		<button ng-show="!isOn" ng-click="toggleOn()" class="btn btn-danger">OFF</button>
-		<button ng-click="erase()" class="btn btn-danger">ERASE</button>
-		<button ng-click="audioTest()" class="btn btn-danger">AUDIOTEST</button>
 		Instrument Type: <select ng-model="instrumentType" ng-change="changeInstrument(instrumentType)">
 			<option ng-repeat="inst in instrumentTypes">{{inst}}</option>
-		</select>
-		Tuning: {{tuning}}
-		Octave: <select ng-model="octave">
-			<option ng-repeat="oct in octaves">{{oct}}</option>
 		</select>
 		Tone: <select ng-model="tone">
 			<option ng-repeat="osc in oscTypes">{{osc}}</option>
 		</select>
-		Duration: <select ng-model="duration">
-			<option ng-repeat="dur in durations">{{dur}}</option>
-		</select>
-		Attack: <select ng-model="attack">
-			<option ng-repeat="att in attackTypes">{{att}}</option>
-		</select>
-		Behavior: <select ng-model="behavior">
-			<option ng-repeat="behav in behaviors">{{behav}}</option>
-		</select><br>
+		Duration: {{durationDict[duration]}}<br>
+		Behavior: {{behavior}}<br>
 		Skeleton: {{skeleton}}<br>
 		Elaboration: {{elaboration}}
 	</div>

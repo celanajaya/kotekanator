@@ -49,35 +49,35 @@ gulp.task('buildJS', ['lintJS'], function () {
         .pipe(gulp.dest('./public'));
 });
 
-gulp.task('testServerJS', function () {
-	return gulp.src('./tests/server/**/*.js', {
-		read: false
-	}).pipe(mocha({ reporter: 'spec' }));
-});
+//gulp.task('testServerJS', function () {
+//	return gulp.src('./tests/server/**/*.js', {
+//		read: false
+//	}).pipe(mocha({ reporter: 'spec' }));
+//});
 
-gulp.task('testServerJSWithCoverage', function (done) {
-    gulp.src('./server/**/*.js')
-        .pipe(istanbul({
-            includeUntested: true
-        }))
-        .pipe(istanbul.hookRequire())
-        .on('finish', function () {
-            gulp.src('./tests/server/**/*.js', {read: false})
-                .pipe(mocha({reporter: 'spec'}))
-                .pipe(istanbul.writeReports({
-                    dir: './coverage/server/',
-                    reporters: ['html', 'text']
-                }))
-                .on('end', done);
-        });
-});
+//gulp.task('testServerJSWithCoverage', function (done) {
+//    gulp.src('./server/**/*.js')
+//        .pipe(istanbul({
+//            includeUntested: true
+//        }))
+//        .pipe(istanbul.hookRequire())
+//        .on('finish', function () {
+//            gulp.src('./tests/server/**/*.js', {read: false})
+//                .pipe(mocha({reporter: 'spec'}))
+//                .pipe(istanbul.writeReports({
+//                    dir: './coverage/server/',
+//                    reporters: ['html', 'text']
+//                }))
+//                .on('end', done);
+//        });
+//});
 
-gulp.task('testBrowserJS', function (done) {
-    karma.start({
-        configFile: __dirname + '/tests/browser/karma.conf.js',
-        singleRun: true
-    }, done);
-});
+//gulp.task('testBrowserJS', function (done) {
+//    karma.start({
+//        configFile: __dirname + '/tests/browser/karma.conf.js',
+//        singleRun: true
+//    }, done);
+//});
 
 gulp.task('buildCSS', function () {
     return gulp.src('./browser/scss/main.scss')
@@ -88,26 +88,26 @@ gulp.task('buildCSS', function () {
         .pipe(gulp.dest('./public'));
 });
 
-gulp.task('seedDB', function () {
-
-    var users = [
-        { email: 'testing@fsa.com', password: 'testing123' },
-        { email: 'joe@fsa.com', password: 'rainbowkicks' },
-        { email: 'obama@gmail.com', password: 'potus' }
-    ];
-
-    var dbConnected = require('./server/db');
-
-    return dbConnected.then(function () {
-        var User = require('mongoose').model('User');
-        return User.create(users);
-    }).then(function () {
-        process.kill(0);
-    }).catch(function (err) {
-        console.error(err);
-    });
-
-});
+//gulp.task('seedDB', function () {
+//
+//    var users = [
+//        { email: 'testing@fsa.com', password: 'testing123' },
+//        { email: 'joe@fsa.com', password: 'rainbowkicks' },
+//        { email: 'obama@gmail.com', password: 'potus' }
+//    ];
+//
+//    var dbConnected = require('./server/db');
+//
+//    return dbConnected.then(function () {
+//        var User = require('mongoose').model('User');
+//        return User.create(users);
+//    }).then(function () {
+//        process.kill(0);
+//    }).catch(function (err) {
+//        console.error(err);
+//    });
+//
+//});
 
 // --------------------------------------------------------------
 

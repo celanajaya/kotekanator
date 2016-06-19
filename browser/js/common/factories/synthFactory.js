@@ -6,21 +6,15 @@ app.factory("synthFactory", function(){
 
 		tunings: ["major", "minor", "balinese", "tembung", "selesir", "sunaren", "slendro", "alit"],
 
-		filtTypes: ["lowpass", "highpass", "bandpass", "lowshelf", "highshelf", "notch", "allpass", "peaking"],
+		instrumentTypes: ['gong', 'pokok', 'ugal', 'reyong', 'gangsa', 'kantilan'],
 
-		durations: ["1n", "2n", "3n", "4n", "6n", "8n", "12n", "16n"],
-
-		instrumentTypes: ['gong', 'bass', 'main', 'reyong', 'keys', 'highkeys', 'gangsa'],
-
-		attackTypes: ['0', '0.25', '0.5', '0.75', '1'],
-
-		params: {
+		instrumentSettings: {
 			'gong':['1', 3, 'sine', '1n', 'gong', 'gong'],
-			'bass':['2', 8, "sine", "2n", 'key', 'bass'],
-			'main': ['3', 8, "sine", "4n", 'key', 'bass'],
+			'pokok':['2', 8, "sine", "2n", 'key', 'bass'],
+			'ugal': ['3', 8, "sine", "4n", 'key', 'none'],
 			'reyong':['3', 15, "triangle", "16n", 'gong', "norot"],
-			'keys': ['3', 15, "pulse", "16n", 'key', 'telu'],
-			'highkeys': ['4', 7, "pulse", "16n", 'key', 'telu']
+			'gangsa': ['3', 15, "pulse", "16n", 'key', 'telu'],
+			'kantilan': ['4', 15, "pulse", "16n", 'key', 'telu']
 		},
 
 		keyToId: {

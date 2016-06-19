@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('kotekanator', ['ui.router', 'ui.bootstrap', 'fsaPreBuilt']);
+window.app = angular.module('kotekanator', ['ui.router', 'ui.bootstrap', 'ui.bootstrap-slider', 'fsaPreBuilt']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)

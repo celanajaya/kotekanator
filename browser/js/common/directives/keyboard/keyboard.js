@@ -14,24 +14,19 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 	$scope.octave = '3';
 	$scope.tone = "sine";
 	$scope.duration = "4n";
-	$scope.instrumentType = "keys";
-	$scope.attack = '0.25';
-	$scope.attackTypes = synthFactory.attackTypes;
+	$scope.durationDict = { "1n": "Whole Note",
+							"2n" :"Half Note",
+							"4n": "Quarter Note",
+							"8n" : "Eighth Note",
+							"16n" : "Sixteenth Note"};
+	$scope.instrumentType = "ugal";
 	$scope.key = "key";
 	$scope.oscTypes = synthFactory.oscTypes;
-	$scope.durations = synthFactory.durations;
 	$scope.instrumentTypes = synthFactory.instrumentTypes;
 	$scope.width = 100 / $scope.numKeys;
 	$scope.currentKey = 0;
 	$scope.behaviors = ["none","norot", "telu", "empat", "nyogCag", "bass", "gong"];
 	$scope.behavior = 'none';
-	$scope.skeleton = [];
-	$scope.elaboration = [];
-
-	$scope.erase = function() {
-		$scope.skeleton = [];
-		$scope.elaboration = [];
-	}
 
 	$scope.toggleOn = function() {
 		$scope.isOn = !$scope.isOn;
@@ -43,25 +38,25 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 
 	$scope.getlooplength = function(beats) {
 		var bars = Math.floor(beats/4);
-		var beats = beats % 4;
+		beats %= 4;
 		return "" + bars + ":" + "" + beats + ":0";
 	};
 
 	$scope.synth = new Tone.PolySynth(4, Tone.MonoSynth).toMaster();
 
 	//synthFactor.params order: octave, range, oscillator, duration
-	$scope.changeInstrument = function(inst) {
-		_.forOwn(synthFactory.params, function(value, key){
-			if (key === inst) {
-				$scope.octave = value[0];
-				$scope.numKeys = parseInt(value[1]); 
-				$scope.tone = value[2];
-				$scope.duration = value[3];
-				$scope.key = value[4];
+	$scope.changeInstrument = function(selectedInstrument) {
+		_.forOwn(synthFactory.instrumentSettings, function(setting, instrument){
+			if (instrument === selectedInstrument) {
+				$scope.octave = setting[0];
+				$scope.numKeys = parseInt(setting[1]); 
+				$scope.tone = setting[2];
+				$scope.duration = setting[3];
+				$scope.key = setting[4];
+				$scope.behavior = setting[5];
 			}
-			if (key === "gong") $scope.behavior = key;
-			if (key === "bass") $scope.behavior = key;
 		});
+		$scope.$digest();
 	};
 
 	//converting the $scope.skeleton into an array of arrays with each pair of notes, then ready for logic functions
@@ -80,8 +75,8 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 				if ($scope.instrumentType === "gong") return logicFactory.gong(arr);
 				if ($scope.instrumentType === "bass") return logicFactory.bass(arr);
 				if ($scope.behavior === "norot") return logicFactory.norot(arr);
-				if (arr[0] === arr[1]) return logicFactory[$scope.behavior]["move"](arr);
-				else return logicFactory[$scope.behavior]["stay"](arr);
+				if (arr[0] === arr[1]) return logicFactory[$scope.behavior].move(arr);
+				else return logicFactory[$scope.behavior].stay(arr);
 			});
 			return _.flatten(ed);
 		}
@@ -90,6 +85,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 	//main player function, takes a key number, determines the right octave and converts to a 
 	//musical letter name based on the assigned tuning
 	$scope.play = function(key) {
+		Tone.Transport.bpm.value = parseInt($scope.bpm);
 		$scope.currentKey = key;
 		$scope.$digest();
 		if (key && $scope.isOn) {
@@ -100,12 +96,9 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 			if (synthFactory[$scope.tuning][key]) {
 				var keyArr = [];
 				keyArr[0] = synthFactory[$scope.tuning][key] + oct;
-				// keyArr[1] = synthFactory[$scope.tuning][(key + 4) % $scope.numKeys] ? synthFactory[$scope.tuning][(key + 4) % $scope.numKeys] + oct : key;
 
 				$scope.synth.set(
-					{"oscillator": {"type": $scope.tone}},
-					{"filter": {"type": $scope.filter}},
-					{"envelope": {"attack": parseInt($scope.attack)}}
+					{"oscillator": {"type": $scope.tone}}
 				);
 
 				$scope.synth.triggerAttackRelease(keyArr, $scope.duration);
@@ -118,12 +111,11 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 		var beats = $scope.skeleton.length;
 		Tone.Transport.loopEnd = $scope.getlooplength(beats);
 		Tone.Transport.loop = true;
-		Tone.Transport.bpm.value = $scope.bpm;
 
 		//set interval to loop over every note and play correct sounds
 		//pArr takes the current transport position and arrIndex converts that into the 
 		//corresponding element in the elaboration 
-		Tone.Transport.setInterval(function () {
+		Tone.Transport.scheduleRepeat(function () {
 			var time = Tone.Transport.position.split(':');
 			var bar = parseInt(time[0] * 16);
 			var beat = parseInt(time[1] * 4);
@@ -144,7 +136,7 @@ app.controller("KYBDCTRL", function($scope, synthFactory, logicFactory, gamelanF
 		var letterCode = e.keyCode.toString();
 		var keyNum = synthFactory.keyToId[letterCode];
 		if ($scope.isRecording && $scope.isOn && keyNum) {
-			$scope.skeleton.push(keyNum);
+			$scope.skeleton.shift(keyNum);
 			if ($scope.behavior === "none") $scope.elaboration = logicFactory.padded($scope.skeleton);
 			else $scope.elaboration = $scope.getElaborations($scope.parsedSkel());
 			$scope.setSequence();

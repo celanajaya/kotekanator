@@ -2,17 +2,17 @@
 <h4>Tuning:<select ng-model="tuning"></h4>
 	<option ng-repeat="scale in tunings">{{scale}}</option>
 </select>
-<!-- <h4>Select Speed:<input ng-model="bpm">bpm</h4> -->
+<h4>Select Speed:<input ng-model="bpm">bpm</h4>
+<slider ng-model="bpm" min="40" step="1" max="300" value="120"></slider>
 <div class="container">
 	<button ng-hide="isRecording" class="btn btn-danger" ng-click="record()"><i class="fa fa-circle" aria-hidden="true"></i></button>
 	<button ng-hide="!isRecording" class="btn btn-danger" ng-click="stop()">RECORDING</button>
 	<button ng-hide="isPlaying" class="btn btn-primary" ng-click="play()"><i class="fa fa-play" aria-hidden="true"></i></span></button>
 	<button ng-hide="!isPlaying" class="btn btn-danger" ng-click="stop()"><i class="fa fa-stop" aria-hidden="true"></i></button>
+	<button ng-click="erase()" class="btn btn-danger">ERASE</button>
 </div>
 <!-- <visualizer></visualizer> -->
 <div class="rack">
-	<keyboard ng-repeat='kbyd in _.range(0, numKybds)'></keyboard>
-	<button ng-click='addKeyboard()' class='btn'><i class="fa fa-plus-square" aria-hidden='true'></i></button>
-	<button ng-click='removeKeyboard()' class='btn'><i class="fa fa-minus-square" aria-hidden='true'></i></button>
+	<keyboard ng-repeat='kbyd in _.range(0, 6)'></keyboard>
 </div>
 </section>

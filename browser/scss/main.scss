@@ -1,14 +1,10 @@
-$primary-color : #6600CC;
-$secondary-color : #CCCC00;
-$text-color : black;
-
 * {
   box-sizing: border-box;
 }
 
 body {
-  background: $primary-color;
-  color: $secondary-color;
+  background: #6600CC;
+  color: #CCCC00;
 }
 
 @mixin clearfix {
@@ -25,5 +21,6 @@ body {
   margin: 0 auto;
 }
 
+@import 'utils';
 @import 'directives/_main';
 @import 'home/main';
